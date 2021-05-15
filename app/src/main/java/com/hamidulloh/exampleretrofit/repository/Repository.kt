@@ -1,26 +1,33 @@
 package com.hamidulloh.exampleretrofit.repository
 
 import com.hamidulloh.exampleretrofit.api.RetrofitInstance
+import com.hamidulloh.exampleretrofit.model.Album
 import com.hamidulloh.exampleretrofit.model.Post
-import okhttp3.internal.http.hasBody
-import retrofit2.Response
 
 class Repository {
-    suspend fun getPost(): Post {
-        val response = RetrofitInstance.api.getPost()
+    suspend fun getPostList(): List<Post> {
+        val response = RetrofitInstance.api.getPostList()
+        val postList = ArrayList<Post>()
+
         if (response.isSuccessful) {
-            val post = response.body()
-            if (post != null) {
-                return post
+            response.body()?.forEach { post ->
+                postList.add(post)
             }
+
         }
+        return postList
+    }
 
-        return Post(
-            userId = 0,
-            id = 0,
-            title = "error",
-            body = "error"
-        )
+    suspend fun getAlbumList(): List<Album> {
+        val response = RetrofitInstance.api.getAlbums()
+        val albumList = ArrayList<Album>()
 
+        if (response.isSuccessful) {
+            response.body()?.forEach { album ->
+                albumList.add(album)
+            }
+
+        }
+        return albumList
     }
 }

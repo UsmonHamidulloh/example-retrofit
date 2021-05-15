@@ -3,17 +3,29 @@ package com.hamidulloh.exampleretrofit.viewmodel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.hamidulloh.exampleretrofit.model.Album
 import com.hamidulloh.exampleretrofit.model.Post
 import com.hamidulloh.exampleretrofit.repository.Repository
 import kotlinx.coroutines.launch
-import retrofit2.Response
 
 class MainViewModel(private val repository: Repository): ViewModel() {
-    val myPost: MutableLiveData<Post> = MutableLiveData()
+    val postList: MutableLiveData<List<Post>> = MutableLiveData()
+    val albumList: MutableLiveData<List<Album>> = MutableLiveData()
 
-    fun getPost() {
+    init {
+        getPostList()
+        getAlbumList()
+    }
+
+    private fun getPostList() {
         viewModelScope.launch {
-            myPost.value = repository.getPost()
+            postList.value = repository.getPostList()
+        }
+    }
+
+    private fun getAlbumList() {
+        viewModelScope.launch {
+            albumList.value = repository.getAlbumList()
         }
     }
 }

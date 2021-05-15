@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/postListFragment">
+
+    <fragment
+        android:id="@+id/postListFragment"
+        android:name="com.hamidulloh.exampleretrofit.ui.fragments.PostListFragment"
+        android:label="Posts" />
+    <fragment android:id="@+id/placeholder" >
+        <action
+            android:id="@+id/action_placeholder_to_postsFragment"
+            app:destination="@id/postListFragment" />
+        <action
+            android:id="@+id/action_placeholder_to_searchFragment"
+            app:destination="@id/addPostFragment" />
+        <action
+            android:id="@+id/action_placeholder_to_imagesFragment"
+            app:destination="@id/imagesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addPostFragment"
+        android:name="com.hamidulloh.exampleretrofit.ui.fragments.AddPostFragment"
+        android:label="Add Post" />
+    <fragment
+        android:id="@+id/imagesFragment"
+        android:name="com.hamidulloh.exampleretrofit.ui.fragments.ImagesFragment"
+        android:label="Albums" />
+</navigation>
