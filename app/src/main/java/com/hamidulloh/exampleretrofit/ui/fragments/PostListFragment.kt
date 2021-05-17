@@ -7,11 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hamidulloh.exampleretrofit.databinding.FragmentPostListBinding
 import com.hamidulloh.exampleretrofit.repository.Repository
 import com.hamidulloh.exampleretrofit.ui.adapter.PostListAdapter
-import com.hamidulloh.exampleretrofit.viewmodel.MainViewModel
+import com.hamidulloh.exampleretrofit.viewmodel.PostsViewModel
 import com.hamidulloh.exampleretrofit.viewmodelfactory.MainViewModelFactory
 
 class PostListFragment : Fragment() {
@@ -27,10 +28,17 @@ class PostListFragment : Fragment() {
         _binding = FragmentPostListBinding.inflate(inflater, container, false)
 
         val repository = Repository()
-        val viewModelFactory = MainViewModelFactory(repository)
-        val viewModel = ViewModelProvider(requireActivity(),
-            viewModelFactory).get(MainViewModel::class.java)
-        val postAdapter = PostListAdapter()
+        val viewModelFactory = MainViewModelFactory(repository, 2)
+        val viewModel = ViewModelProvider(
+            requireActivity(),
+            viewModelFactory
+        ).get(PostsViewModel::class.java)
+
+        val postAdapter = PostListAdapter(PostListAdapter.PostItemCallBack { post ->
+            val navDirections = PostListFragmentDirections
+                .actionPostListFragmentToPostFragment(postId = post.id)
+            findNavController().navigate(navDirections)
+        })
 
         viewModel.postList.observe(requireActivity(), { postList ->
             postAdapter.submitList(postList)
@@ -43,5 +51,10 @@ class PostListFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

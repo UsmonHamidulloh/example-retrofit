@@ -2,6 +2,7 @@ package com.hamidulloh.exampleretrofit.repository
 
 import com.hamidulloh.exampleretrofit.api.RetrofitInstance
 import com.hamidulloh.exampleretrofit.model.Album
+import com.hamidulloh.exampleretrofit.model.Comment
 import com.hamidulloh.exampleretrofit.model.Post
 
 class Repository {
@@ -29,5 +30,18 @@ class Repository {
 
         }
         return albumList
+    }
+
+    suspend fun getCommentList(postId: Int): List<Comment> {
+        val response = RetrofitInstance.api.getComments(postId)
+        val commentList = ArrayList<Comment>()
+
+        if (response.isSuccessful) {
+            response.body()?.forEach { comment ->
+                commentList.add(comment)
+            }
+        }
+
+        return commentList
     }
 }

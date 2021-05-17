@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hamidulloh.exampleretrofit.databinding.ItemPostBinding
 import com.hamidulloh.exampleretrofit.model.Post
 
-class PostListAdapter : ListAdapter<Post, PostListAdapter.ViewHolder>(PostListDiffCallback()) {
+class PostListAdapter(
+    val itemClickListener: PostItemCallBack
+) : ListAdapter<Post, PostListAdapter.ViewHolder>(PostListDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemPostBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -28,7 +30,17 @@ class PostListAdapter : ListAdapter<Post, PostListAdapter.ViewHolder>(PostListDi
             postId.text = "postId: ${post.id}"
             title.text = post.title
             body.text = post.body
+
+            root.setOnClickListener {
+                itemClickListener.onItemClick(post)
+            }
         }
+
+
+    }
+
+    class PostItemCallBack(val itemClickListener: (item: Post) -> Unit) {
+        fun onItemClick(item: Post) = itemClickListener(item)
     }
 
     class PostListDiffCallback : DiffUtil.ItemCallback<Post>() {

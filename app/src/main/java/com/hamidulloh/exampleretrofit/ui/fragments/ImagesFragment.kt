@@ -10,8 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hamidulloh.exampleretrofit.databinding.FragmentImagesBinding
 import com.hamidulloh.exampleretrofit.repository.Repository
 import com.hamidulloh.exampleretrofit.ui.adapter.AlbumListAdapter
-import com.hamidulloh.exampleretrofit.ui.adapter.PostListAdapter
-import com.hamidulloh.exampleretrofit.viewmodel.MainViewModel
+import com.hamidulloh.exampleretrofit.viewmodel.PostsViewModel
 import com.hamidulloh.exampleretrofit.viewmodelfactory.MainViewModelFactory
 
 class ImagesFragment : Fragment() {
@@ -26,9 +25,9 @@ class ImagesFragment : Fragment() {
         _binding = FragmentImagesBinding.inflate(inflater, container, false)
 
         val repository = Repository()
-        val viewModelFactory = MainViewModelFactory(repository)
+        val viewModelFactory = MainViewModelFactory(repository, 2)
         val viewModel = ViewModelProvider(requireActivity(),
-            viewModelFactory).get(MainViewModel::class.java)
+            viewModelFactory).get(PostsViewModel::class.java)
         val albumAdapter = AlbumListAdapter()
 
         viewModel.albumList.observe(requireActivity(), { albumList ->
@@ -41,5 +40,10 @@ class ImagesFragment : Fragment() {
         }
 
         return binding.root
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

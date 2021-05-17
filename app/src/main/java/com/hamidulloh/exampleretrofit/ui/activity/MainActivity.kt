@@ -2,6 +2,7 @@ package com.hamidulloh.exampleretrofit.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -15,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val bottomNavigation = findViewById<BottomNavigationView>(R.id.bottom_nav)
-        val navController = findNavController(R.id.fragment)
+        val navController = findNavController(R.id.fragment_nav_host)
         val appBarConfiguration = AppBarConfiguration(setOf(
             R.id.postListFragment,
             R.id.addPostFragment,
@@ -26,5 +27,12 @@ class MainActivity : AppCompatActivity() {
         bottomNavigation.setupWithNavController(navController)
         bottomNavigation.selectedItemId = R.id.postListFragment
 
+
+
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        return Navigation.findNavController(this, R.id.fragment_nav_host)
+            .navigateUp() || super.onSupportNavigateUp()
     }
 }

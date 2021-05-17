@@ -8,7 +8,13 @@
     <fragment
         android:id="@+id/postListFragment"
         android:name="com.hamidulloh.exampleretrofit.ui.fragments.PostListFragment"
-        android:label="Posts" />
+        android:label="Posts" >
+        <action
+            android:id="@+id/action_postListFragment_to_postFragment"
+            app:destination="@id/postFragment"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/fragment_close_exit" />
+    </fragment>
     <fragment android:id="@+id/placeholder" >
         <action
             android:id="@+id/action_placeholder_to_postsFragment"
@@ -28,4 +34,12 @@
         android:id="@+id/imagesFragment"
         android:name="com.hamidulloh.exampleretrofit.ui.fragments.ImagesFragment"
         android:label="Albums" />
+    <fragment
+        android:id="@+id/postFragment"
+        android:name="com.hamidulloh.exampleretrofit.ui.fragments.CommentListFragment"
+        android:label="Comments">
+        <argument
+            android:name="post_id"
+            app:argType="integer" />
+    </fragment>
 </navigation>
