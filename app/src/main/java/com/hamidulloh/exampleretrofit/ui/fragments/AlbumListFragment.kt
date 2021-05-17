@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hamidulloh.exampleretrofit.databinding.FragmentAlbumListBinding
 import com.hamidulloh.exampleretrofit.repository.Repository
@@ -25,10 +26,16 @@ class AlbumListFragment : Fragment() {
         _binding = FragmentAlbumListBinding.inflate(inflater, container, false)
 
         val repository = Repository()
-        val viewModelFactory = MainViewModelFactory(repository, 2)
-        val viewModel = ViewModelProvider(requireActivity(),
-            viewModelFactory).get(ListViewModel::class.java)
-        val albumAdapter = AlbumListAdapter()
+        val viewModelFactory = MainViewModelFactory(repository, 1)
+        val viewModel = ViewModelProvider(
+            requireActivity(),
+            viewModelFactory
+        ).get(ListViewModel::class.java)
+        val albumAdapter = AlbumListAdapter(AlbumListAdapter.AlbumItemCallBack { album ->
+            val navDirections = AlbumListFragmentDirections
+                .actionImagesFragmentToPhotoListFragment2(album.album_id)
+            findNavController().navigate(navDirections)
+        })
 
         viewModel.albumList.observe(requireActivity(), { albumList ->
             albumAdapter.submitList(albumList)

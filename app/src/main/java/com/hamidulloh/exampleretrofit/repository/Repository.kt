@@ -3,6 +3,7 @@ package com.hamidulloh.exampleretrofit.repository
 import com.hamidulloh.exampleretrofit.api.RetrofitInstance
 import com.hamidulloh.exampleretrofit.model.Album
 import com.hamidulloh.exampleretrofit.model.Comment
+import com.hamidulloh.exampleretrofit.model.Photo
 import com.hamidulloh.exampleretrofit.model.Post
 
 class Repository {
@@ -20,7 +21,7 @@ class Repository {
     }
 
     suspend fun getAlbumList(): List<Album> {
-        val response = RetrofitInstance.api.getAlbums()
+        val response = RetrofitInstance.api.getAlbumList()
         val albumList = ArrayList<Album>()
 
         if (response.isSuccessful) {
@@ -33,7 +34,7 @@ class Repository {
     }
 
     suspend fun getCommentList(postId: Int): List<Comment> {
-        val response = RetrofitInstance.api.getComments(postId)
+        val response = RetrofitInstance.api.getCommentList(postId)
         val commentList = ArrayList<Comment>()
 
         if (response.isSuccessful) {
@@ -43,5 +44,18 @@ class Repository {
         }
 
         return commentList
+    }
+
+    suspend fun getPhotoList(albumId: Int): List<Photo> {
+        val response = RetrofitInstance.api.getPhotoList(albumId)
+        val photoList = ArrayList<Photo>()
+
+        if (response.isSuccessful) {
+            response.body()?.forEach { photo ->
+                photoList.add(photo)
+            }
+        }
+
+        return photoList
     }
 }

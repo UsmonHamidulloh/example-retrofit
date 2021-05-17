@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.hamidulloh.exampleretrofit.databinding.ItemAlbumBinding
 import com.hamidulloh.exampleretrofit.model.Album
 
-class AlbumListAdapter : ListAdapter<Album, AlbumListAdapter.ViewHolder>(AlbumListDiffCallback()) {
+class AlbumListAdapter(
+    private val itemClickListener: AlbumItemCallBack
+) : ListAdapter<Album, AlbumListAdapter.ViewHolder>(AlbumListDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemAlbumBinding.inflate(
             LayoutInflater.from(parent.context),
@@ -27,7 +29,15 @@ class AlbumListAdapter : ListAdapter<Album, AlbumListAdapter.ViewHolder>(AlbumLi
             userId.text = "user_id: ${album.user_id}"
             albumId.text = "album_id: ${album.album_id}"
             title.text = album.title
+
+            root.setOnClickListener {
+                itemClickListener.onItemClick(album)
+            }
         }
+    }
+
+    class AlbumItemCallBack(val itemClickListener: (item: Album) -> Unit) {
+        fun onItemClick(item: Album) = itemClickListener(item)
     }
 
     class AlbumListDiffCallback : DiffUtil.ItemCallback<Album>() {

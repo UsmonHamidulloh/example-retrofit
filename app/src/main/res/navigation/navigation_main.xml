@@ -33,13 +33,25 @@
     <fragment
         android:id="@+id/imagesFragment"
         android:name="com.hamidulloh.exampleretrofit.ui.fragments.AlbumListFragment"
-        android:label="Albums" />
+        android:label="Albums" >
+        <action
+            android:id="@+id/action_imagesFragment_to_photoListFragment2"
+            app:destination="@id/photoListFragment" />
+    </fragment>
     <fragment
         android:id="@+id/postFragment"
         android:name="com.hamidulloh.exampleretrofit.ui.fragments.CommentListFragment"
         android:label="Comments">
         <argument
             android:name="post_id"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/photoListFragment"
+        android:name="com.hamidulloh.exampleretrofit.ui.fragments.PhotoListFragment"
+        android:label="Photos" >
+        <argument
+            android:name="album_id"
             app:argType="integer" />
     </fragment>
 </navigation>

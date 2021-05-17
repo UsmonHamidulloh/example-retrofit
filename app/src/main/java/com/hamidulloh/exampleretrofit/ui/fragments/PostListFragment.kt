@@ -28,7 +28,7 @@ class PostListFragment : Fragment() {
         _binding = FragmentPostListBinding.inflate(inflater, container, false)
 
         val repository = Repository()
-        val viewModelFactory = MainViewModelFactory(repository, 2)
+        val viewModelFactory = MainViewModelFactory(repository, 1)
         val viewModel = ViewModelProvider(
             requireActivity(),
             viewModelFactory

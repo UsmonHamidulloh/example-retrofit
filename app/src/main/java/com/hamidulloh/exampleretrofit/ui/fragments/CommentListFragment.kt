@@ -28,7 +28,7 @@ class CommentListFragment : Fragment() {
         _binding = FragmentCommentListBinding.inflate(inflater, container, false)
 
         val repository = Repository()
-        val viewModelFactory = MainViewModelFactory(repository, 1)
+        val viewModelFactory = MainViewModelFactory(repository, 2)
         viewModel = ViewModelProvider(requireActivity(), viewModelFactory)
             .get(CommentsViewModel::class.java)
         val args: CommentListFragmentArgs by navArgs()
