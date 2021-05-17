@@ -13,7 +13,6 @@ import com.hamidulloh.exampleretrofit.repository.Repository
 import com.hamidulloh.exampleretrofit.ui.adapter.CommentListAdapter
 import com.hamidulloh.exampleretrofit.utils.Constants.Companion.BASE_URL
 import com.hamidulloh.exampleretrofit.viewmodel.CommentsViewModel
-import com.hamidulloh.exampleretrofit.viewmodel.PostsViewModel
 import com.hamidulloh.exampleretrofit.viewmodelfactory.MainViewModelFactory
 
 class CommentListFragment : Fragment() {
@@ -25,7 +24,7 @@ class CommentListFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCommentListBinding.inflate(inflater, container, false)
 
         val repository = Repository()

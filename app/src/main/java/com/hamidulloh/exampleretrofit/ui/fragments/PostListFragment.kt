@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.hamidulloh.exampleretrofit.databinding.FragmentPostListBinding
 import com.hamidulloh.exampleretrofit.repository.Repository
 import com.hamidulloh.exampleretrofit.ui.adapter.PostListAdapter
-import com.hamidulloh.exampleretrofit.viewmodel.PostsViewModel
+import com.hamidulloh.exampleretrofit.viewmodel.ListViewModel
 import com.hamidulloh.exampleretrofit.viewmodelfactory.MainViewModelFactory
 
 class PostListFragment : Fragment() {
@@ -32,11 +32,11 @@ class PostListFragment : Fragment() {
         val viewModel = ViewModelProvider(
             requireActivity(),
             viewModelFactory
-        ).get(PostsViewModel::class.java)
+        ).get(ListViewModel::class.java)
 
         val postAdapter = PostListAdapter(PostListAdapter.PostItemCallBack { post ->
             val navDirections = PostListFragmentDirections
-                .actionPostListFragmentToPostFragment(postId = post.id)
+                .actionPostListFragmentToPostFragment(postId = post.post_id)
             findNavController().navigate(navDirections)
         })
 

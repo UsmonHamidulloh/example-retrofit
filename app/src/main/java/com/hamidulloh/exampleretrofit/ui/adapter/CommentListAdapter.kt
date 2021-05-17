@@ -24,7 +24,7 @@ class CommentListAdapter : ListAdapter<Comment, CommentListAdapter.ViewHolder>(C
         val comment = getItem(position)
 
         holder.binding.apply {
-            commentId.text = "commendId: ${comment.commentId}"
+            commentId.text = "comment_id: ${comment.comment_id}"
             name.text = comment.name
             email.text = comment.email
             body.text = comment.body
@@ -33,7 +33,7 @@ class CommentListAdapter : ListAdapter<Comment, CommentListAdapter.ViewHolder>(C
 
     class CommentListDiffCallback : DiffUtil.ItemCallback<Comment>() {
         override fun areItemsTheSame(oldItem: Comment, newItem: Comment): Boolean {
-            return oldItem.commentId == newItem.commentId
+            return oldItem.comment_id == newItem.comment_id
         }
 
         override fun areContentsTheSame(oldItem: Comment, newItem: Comment): Boolean {

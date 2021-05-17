@@ -9,10 +9,9 @@ import com.hamidulloh.exampleretrofit.model.Post
 import com.hamidulloh.exampleretrofit.repository.Repository
 import kotlinx.coroutines.launch
 
-class PostsViewModel(private val repository: Repository): ViewModel() {
+class ListViewModel(private val repository: Repository): ViewModel() {
     val postList: MutableLiveData<List<Post>> = MutableLiveData()
     val albumList: MutableLiveData<List<Album>> = MutableLiveData()
-    val commentList: MutableLiveData<List<Comment>> = MutableLiveData()
 
     init {
         getPostList()

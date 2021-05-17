@@ -4,10 +4,10 @@ import com.google.gson.annotations.SerializedName
 
 data class Comment(
     @SerializedName("postId")
-    val postId: Int,
+    val post_id: Int,
 
     @SerializedName("id")
-    val commentId: Int,
+    val comment_id: Int,
 
     @SerializedName("name")
     val name: String,

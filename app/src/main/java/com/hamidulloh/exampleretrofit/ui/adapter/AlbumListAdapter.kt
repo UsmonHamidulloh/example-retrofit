@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.hamidulloh.exampleretrofit.databinding.ItemAlbumBinding
 import com.hamidulloh.exampleretrofit.model.Album
-import com.hamidulloh.exampleretrofit.model.Post
 
 class AlbumListAdapter : ListAdapter<Album, AlbumListAdapter.ViewHolder>(AlbumListDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -22,18 +21,18 @@ class AlbumListAdapter : ListAdapter<Album, AlbumListAdapter.ViewHolder>(AlbumLi
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val post = getItem(position)
+        val album = getItem(position)
 
         holder.binding.apply {
-            userId.text = "userId: ${post.userId}"
-            albumId.text = "albumId: ${post.albumId}"
-            title.text = post.title
+            userId.text = "user_id: ${album.user_id}"
+            albumId.text = "album_id: ${album.album_id}"
+            title.text = album.title
         }
     }
 
     class AlbumListDiffCallback : DiffUtil.ItemCallback<Album>() {
         override fun areItemsTheSame(oldItem: Album, newItem: Album): Boolean {
-            return oldItem.albumId == newItem.albumId
+            return oldItem.album_id == newItem.album_id
         }
 
         override fun areContentsTheSame(oldItem: Album, newItem: Album): Boolean {

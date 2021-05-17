@@ -4,10 +4,10 @@ import com.google.gson.annotations.SerializedName
 
 data class Album(
     @SerializedName("userId")
-    val userId: Int,
+    val user_id: Int,
 
     @SerializedName("id")
-    val albumId: Int,
+    val album_id: Int,
 
     @SerializedName("title")
     val title: String

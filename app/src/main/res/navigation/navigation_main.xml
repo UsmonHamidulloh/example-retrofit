@@ -32,7 +32,7 @@
         android:label="Add Post" />
     <fragment
         android:id="@+id/imagesFragment"
-        android:name="com.hamidulloh.exampleretrofit.ui.fragments.ImagesFragment"
+        android:name="com.hamidulloh.exampleretrofit.ui.fragments.AlbumListFragment"
         android:label="Albums" />
     <fragment
         android:id="@+id/postFragment"

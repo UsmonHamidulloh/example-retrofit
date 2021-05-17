@@ -10,7 +10,7 @@ import com.hamidulloh.exampleretrofit.databinding.ItemPostBinding
 import com.hamidulloh.exampleretrofit.model.Post
 
 class PostListAdapter(
-    val itemClickListener: PostItemCallBack
+    private val itemClickListener: PostItemCallBack
 ) : ListAdapter<Post, PostListAdapter.ViewHolder>(PostListDiffCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemPostBinding.inflate(
@@ -26,8 +26,8 @@ class PostListAdapter(
         val post = getItem(position)
 
         holder.binding.apply {
-            userId.text = "userId: ${post.userId}"
-            postId.text = "postId: ${post.id}"
+            userId.text = "user_id: ${post.user_id}"
+            postId.text = "post_id: ${post.post_id}"
             title.text = post.title
             body.text = post.body
 
@@ -45,7 +45,7 @@ class PostListAdapter(
 
     class PostListDiffCallback : DiffUtil.ItemCallback<Post>() {
         override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem.post_id == newItem.post_id
         }
 
         override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
