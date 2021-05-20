@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hamidulloh.exampleretrofit.MyApplication
+import com.hamidulloh.exampleretrofit.dagger.component.DaggerMainComponent
 import com.hamidulloh.exampleretrofit.databinding.FragmentCommentListBinding
 import com.hamidulloh.exampleretrofit.repository.Repository
 import com.hamidulloh.exampleretrofit.ui.adapter.CommentListAdapter
@@ -27,9 +28,7 @@ class CommentListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCommentListBinding.inflate(inflater, container, false)
-        val appContainer = (requireActivity().application as MyApplication).appContainer
-
-        val repository = appContainer.repository
+        val repository = DaggerMainComponent.create().createRepository()
         val viewModelFactory = MainViewModelFactory(repository, 2)
         viewModel = ViewModelProvider(requireActivity(), viewModelFactory)
             .get(CommentsViewModel::class.java)

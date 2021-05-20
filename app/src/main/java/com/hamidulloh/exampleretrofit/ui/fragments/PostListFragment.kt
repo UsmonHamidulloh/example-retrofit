@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.hamidulloh.exampleretrofit.MyApplication
+import com.hamidulloh.exampleretrofit.dagger.component.DaggerMainComponent
 import com.hamidulloh.exampleretrofit.databinding.FragmentPostListBinding
 import com.hamidulloh.exampleretrofit.repository.Repository
 import com.hamidulloh.exampleretrofit.ui.adapter.PostListAdapter
@@ -20,16 +21,14 @@ class PostListFragment : Fragment() {
     private var _binding: FragmentPostListBinding? = null
     private val binding get() = _binding!!
 
-    private val myTag = "PostListFragment"
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPostListBinding.inflate(inflater, container, false)
-        val appContainer = (requireActivity().application as MyApplication).appContainer
 
-        val repository = appContainer.repository
+        val repository = DaggerMainComponent.create().createRepository()
         val viewModelFactory = MainViewModelFactory(repository, 1)
         val viewModel = ViewModelProvider(
             requireActivity(),
