@@ -5,8 +5,7 @@ import com.hamidulloh.exampleretrofit.model.Comment
 import com.hamidulloh.exampleretrofit.model.Photo
 import com.hamidulloh.exampleretrofit.model.Post
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface JsonHolderApi {
     @GET("posts")
@@ -24,4 +23,9 @@ interface JsonHolderApi {
     suspend fun getPhotoList(
         @Query("albumId") albumId: Int
     ): Response<List<Photo>>
+
+    @POST("posts")
+    suspend fun sendingPost(
+        @Body post: Post
+    ): Response<Post>
 }

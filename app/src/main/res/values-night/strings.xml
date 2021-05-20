@@ -3,4 +3,10 @@
     <string name="menu_posts">Posts</string>
     <string name="menu_add_post">Add Post</string>
     <string name="menu_images">Albums</string>
+    <string name="fragment_add_postid">postId</string>
+    <string name="fragment_add_user_id">user_id</string>
+    <string name="fragment_add_post_id">post_id</string>
+    <string name="title">title</string>
+    <string name="fragment_add_body">body</string>
+    <string name="fragment_add_post">POST</string>
 </resources>

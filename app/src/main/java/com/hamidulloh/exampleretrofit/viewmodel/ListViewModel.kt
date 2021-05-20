@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 class ListViewModel(private val repository: Repository): ViewModel() {
     val postList: MutableLiveData<List<Post>> = MutableLiveData()
     val albumList: MutableLiveData<List<Album>> = MutableLiveData()
+    val postResponse: MutableLiveData<Post> = MutableLiveData()
 
     init {
         getPostList()
@@ -27,6 +28,12 @@ class ListViewModel(private val repository: Repository): ViewModel() {
     private fun getAlbumList() {
         viewModelScope.launch {
             albumList.value = repository.getAlbumList()
+        }
+    }
+
+    fun pushPost(post: Post) {
+        viewModelScope.launch {
+            postResponse.value = repository.pushPost(post)
         }
     }
 

@@ -5,6 +5,7 @@ import com.hamidulloh.exampleretrofit.model.Album
 import com.hamidulloh.exampleretrofit.model.Comment
 import com.hamidulloh.exampleretrofit.model.Photo
 import com.hamidulloh.exampleretrofit.model.Post
+import retrofit2.Response
 
 class Repository(private val retrofitInstance: RetrofitInstance) {
     suspend fun getPostList(): List<Post> {
@@ -57,5 +58,15 @@ class Repository(private val retrofitInstance: RetrofitInstance) {
         }
 
         return photoList
+    }
+
+    suspend fun pushPost(post: Post) : Post? {
+        val response = retrofitInstance.api.sendingPost(post)
+
+        return if (response.isSuccessful) {
+            response.body()!!
+        } else {
+            null
+        }
     }
 }
