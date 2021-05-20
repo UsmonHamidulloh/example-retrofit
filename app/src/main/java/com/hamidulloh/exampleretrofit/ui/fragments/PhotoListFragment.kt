@@ -21,7 +21,7 @@ class PhotoListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val safeArgs: PhotoListFragmentArgs by navArgs()
-
+    private lateinit var viewModel: PhotosViewModel
     @SuppressLint("SetTextI18n")
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +33,7 @@ class PhotoListFragment : Fragment() {
         val repository = Repository()
         val photoListAdapter = PhotoListAdapter()
         val viewModelFactory = MainViewModelFactory(repository, 3)
-        val viewModel = ViewModelProvider(
+        viewModel = ViewModelProvider(
             requireActivity(),
             viewModelFactory
         )[PhotosViewModel::class.java]
@@ -56,5 +56,10 @@ class PhotoListFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+    }
+
+    override fun onStart() {
+        super.onStart()
+        viewModel.photoList.value = null
     }
 }
