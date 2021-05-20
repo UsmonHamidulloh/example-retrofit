@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Example Retrofit</string>
+    <string name="menu_posts">Xabarlar</string>
+    <string name="menu_add_post">Xabar jo\'natish</string>
+    <string name="menu_images">Albomlar</string>
+    <string name="fragment_add_postid">xabar_id</string>
+    <string name="fragment_add_user_id">foydalanuvchi_id</string>
+    <string name="fragment_add_post_id">xabar_id</string>
+    <string name="title">sarlavha</string>
+    <string name="fragment_add_body">tana</string>
+    <string name="fragment_add_post">JO\'NATISH</string>
+</resources>
