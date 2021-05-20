@@ -1,16 +1,13 @@
 package com.hamidulloh.exampleretrofit.ui.adapter
 
 import android.annotation.SuppressLint
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.hamidulloh.exampleretrofit.databinding.ItemPhotoBinding
 import com.hamidulloh.exampleretrofit.model.Photo
-import com.hamidulloh.exampleretrofit.ui.fragments.PhotoListFragment
 import com.squareup.picasso.Picasso
 
 class PhotoListAdapter : ListAdapter<Photo, PhotoListAdapter.ViewHolder>(PhotoListDiffCallback()) {
@@ -29,7 +26,7 @@ class PhotoListAdapter : ListAdapter<Photo, PhotoListAdapter.ViewHolder>(PhotoLi
 
         holder.binding.apply {
 //            Glide
-//                .with(root)
+//                .with(root.context)
 //                .load(photo.thumbnail_url)
 //                .into(image)
 
