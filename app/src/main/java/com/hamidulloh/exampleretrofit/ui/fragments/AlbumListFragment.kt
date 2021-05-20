@@ -1,5 +1,6 @@
 package com.hamidulloh.exampleretrofit.ui.fragments
 
+import android.app.Activity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hamidulloh.exampleretrofit.MyApplication
 import com.hamidulloh.exampleretrofit.databinding.FragmentAlbumListBinding
 import com.hamidulloh.exampleretrofit.repository.Repository
 import com.hamidulloh.exampleretrofit.ui.adapter.AlbumListAdapter
@@ -24,8 +26,9 @@ class AlbumListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentAlbumListBinding.inflate(inflater, container, false)
+        val appContainer = (requireActivity().application as MyApplication).appContainer
 
-        val repository = Repository()
+        val repository = appContainer.repository
         val viewModelFactory = MainViewModelFactory(repository, 1)
         val viewModel = ViewModelProvider(
             requireActivity(),

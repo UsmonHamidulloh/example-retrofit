@@ -14,12 +14,13 @@ class MainViewModelFactory(
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         @Suppress("UNCHECKED_CAST")
-        when (whichViewModel) {
-            1 -> return ListViewModel(repository) as T
-            2 -> return CommentsViewModel(repository) as T
-            3 -> return PhotosViewModel(repository) as T
+        return when (whichViewModel) {
+            1 -> ListViewModel(repository) as T
+            2 -> CommentsViewModel(repository) as T
+            3 -> PhotosViewModel(repository) as T
+
+            else -> throw IllegalArgumentException("unknown viewModel")
         }
-        return ListViewModel(repository) as T
     }
 
 }

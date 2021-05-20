@@ -6,9 +6,9 @@ import com.hamidulloh.exampleretrofit.model.Comment
 import com.hamidulloh.exampleretrofit.model.Photo
 import com.hamidulloh.exampleretrofit.model.Post
 
-class Repository {
+class Repository(private val retrofitInstance: RetrofitInstance) {
     suspend fun getPostList(): List<Post> {
-        val response = RetrofitInstance.api.getPostList()
+        val response = retrofitInstance.api.getPostList()
         val postList = ArrayList<Post>()
 
         if (response.isSuccessful) {
@@ -21,7 +21,7 @@ class Repository {
     }
 
     suspend fun getAlbumList(): List<Album> {
-        val response = RetrofitInstance.api.getAlbumList()
+        val response = retrofitInstance.api.getAlbumList()
         val albumList = ArrayList<Album>()
 
         if (response.isSuccessful) {
@@ -34,7 +34,7 @@ class Repository {
     }
 
     suspend fun getCommentList(postId: Int): List<Comment> {
-        val response = RetrofitInstance.api.getCommentList(postId)
+        val response = retrofitInstance.api.getCommentList(postId)
         val commentList = ArrayList<Comment>()
 
         if (response.isSuccessful) {
@@ -47,7 +47,7 @@ class Repository {
     }
 
     suspend fun getPhotoList(albumId: Int): List<Photo> {
-        val response = RetrofitInstance.api.getPhotoList(albumId)
+        val response = retrofitInstance.api.getPhotoList(albumId)
         val photoList = ArrayList<Photo>()
 
         if (response.isSuccessful) {

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.hamidulloh.exampleretrofit.MyApplication
 import com.hamidulloh.exampleretrofit.databinding.FragmentPhotoListBinding
 import com.hamidulloh.exampleretrofit.repository.Repository
 import com.hamidulloh.exampleretrofit.ui.adapter.PhotoListAdapter
@@ -29,8 +30,9 @@ class PhotoListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentPhotoListBinding.inflate(inflater, container, false)
+        val appContainer = (requireActivity().application as MyApplication).appContainer
 
-        val repository = Repository()
+        val repository = appContainer.repository
         val photoListAdapter = PhotoListAdapter()
         val viewModelFactory = MainViewModelFactory(repository, 3)
         viewModel = ViewModelProvider(
