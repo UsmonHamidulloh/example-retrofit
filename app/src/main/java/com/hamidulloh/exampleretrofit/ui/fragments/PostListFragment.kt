@@ -43,7 +43,6 @@ class PostListFragment : Fragment() {
 
         viewModel.postList.observe(requireActivity(), { postList ->
             postAdapter.submitList(postList)
-            Log.d(myTag, "onCreateView: $postList")
         })
 
         binding.postList.apply {
