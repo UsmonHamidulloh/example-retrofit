@@ -45,7 +45,7 @@ class PhotoListFragment : Fragment() {
 
         binding.photoList.apply {
             adapter = photoListAdapter
-            layoutManager = LinearLayoutManager(requireContext())
+            setHasFixedSize(true)
         }
 
         binding.url.text = "${BASE_URL}/photos?albumId=${safeArgs.albumId}"
