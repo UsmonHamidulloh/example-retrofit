@@ -9,6 +9,7 @@ import android.widget.ListView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.material.snackbar.Snackbar
 import com.hamidulloh.exampleretrofit.dagger.component.DaggerMainComponent
 import com.hamidulloh.exampleretrofit.databinding.FragmentAddPostBinding
 import com.hamidulloh.exampleretrofit.model.Post
@@ -33,26 +34,35 @@ class AddPostFragment : Fragment() {
             .get(ListViewModel::class.java)
 
         binding.postBtn.setOnClickListener {
-            val post = Post(
-                post_id = Integer.valueOf(binding.postId.text.toString()),
-                user_id = Integer.valueOf(binding.userId.text.toString()),
-                title = binding.title.text.toString(),
-                body = binding.body.text.toString()
-            )
+            if (checkIsNotEmpty()) {
+                val post = Post(
+                    post_id = Integer.valueOf(binding.postId.text.toString()),
+                    user_id = Integer.valueOf(binding.userId.text.toString()),
+                    title = binding.title.text.toString(),
+                    body = binding.body.text.toString()
+                )
 
-            viewModel.pushPost(post)
+                viewModel.pushPost(post)
 
-            viewModel.postResponse.observe(requireActivity(), { postResponse ->
-                Toast.makeText(requireContext(), postResponse.toString(), Toast.LENGTH_LONG).show()
-            })
+                viewModel.postResponse.observe(requireActivity(), { postResponse ->
+                    Toast.makeText(requireContext(), postResponse.toString(), Toast.LENGTH_LONG).show()
+                })
 
-            binding.userId.text.clear()
-            binding.postId.text.clear()
-            binding.title.text.clear()
-            binding.body.text.clear()
+                binding.userId.text.clear()
+                binding.postId.text.clear()
+                binding.title.text.clear()
+                binding.body.text.clear()
+            } else {
+                Toast.makeText(requireContext(), "Fill in the blanks", Toast.LENGTH_SHORT).show()
+            }
         }
 
         return binding.root
+    }
+
+    private fun checkIsNotEmpty() : Boolean {
+        return binding.body.text.isNotEmpty() && binding.postId.text.isNotEmpty()
+                && binding.title.text.isNotEmpty() && binding.userId.text.isNotEmpty()
     }
 
     override fun onDestroy() {
